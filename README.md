@@ -29,4 +29,7 @@ md-render.nvim 使用 [denny0223/md-render.nvim](https://github.com/denny0223/md
 ```sh
 python3 ~/.nvim/tests/setup.py
 nvim --headless -n -i NONE -u ~/.nvim/init.lua -l ~/.nvim/tests/settings.lua
+python3 ~/.nvim/tests/install.py
 ```
+
+最後一項會在暫存 HOME 下載外掛並檢查首次安裝，需要網路。

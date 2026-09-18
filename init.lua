@@ -89,7 +89,7 @@ vim.cmd.source(plug_path)
 vim.fn["plug#begin"](data .. "/plugged")
 local Plug = vim.fn["plug#"]
 Plug("alvan/vim-closetag")
-Plug("junegunn/fzf", { ["do"] = function() vim.fn["fzf#install"]() end })
+Plug("junegunn/fzf", { ["do"] = "./install --bin" })
 Plug("junegunn/fzf.vim")
 Plug("easymotion/vim-easymotion")
 Plug("tpope/vim-surround")
