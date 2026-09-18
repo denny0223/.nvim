@@ -40,6 +40,13 @@ local function check()
   vim.bo.modified = false
 
   equal(vim.fn.maparg("<leader>p", "n"), "")
+  vim.cmd.enew()
+  vim.bo.filetype = "markdown"
+  local markdown = { "first line  ", "second line", "", "```text", "example  ", "```" }
+  vim.api.nvim_buf_set_lines(0, 0, -1, false, markdown)
+  vim.api.nvim_exec_autocmds("BufWritePre", { buffer = 0 })
+  equal(vim.api.nvim_buf_get_lines(0, 0, -1, false), markdown)
+  vim.bo.modified = false
 
   print("Vim-compatible Neovim settings and plugins OK")
 end
