@@ -97,7 +97,7 @@ Plug("hotoo/pangu.vim")
 Plug("dense-analysis/ale")
 Plug("github/copilot.vim")
 Plug("folke/snacks.nvim")
-Plug("denny0223/md-render.nvim", { commit = "7a58f87722cefd4cde06381933a6c71726468a6f" })
+Plug("denny0223/md-render.nvim", { commit = "9750f3709091f5fad4bbf0c7c654399c6f993e32" })
 vim.fn["plug#end"]()
 
 for _, plugin in pairs(vim.g.plugs) do

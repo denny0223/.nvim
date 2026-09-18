@@ -16,7 +16,7 @@ bash ~/.nvim/setup.sh
 
 ## Markdown
 
-`\p`／`:MdRender toggle` 切換原始碼與整份文件預覽，包含圖片和 Mermaid。
+`\p`／`:MdRender toggle` 切換原始碼與整份文件預覽，包含圖片和 Mermaid。圖片先顯示完整概覽。
 
 md-render.nvim 使用 [denny0223/md-render.nvim](https://github.com/denny0223/md-render.nvim) fork，圖片由 Snacks 顯示。需要 Kitty、`mmdc`、ImageMagick 與 Chrome；在 tmux 中需啟用 `allow-passthrough on`。
 
