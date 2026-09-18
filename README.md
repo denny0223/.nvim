@@ -20,6 +20,10 @@ bash ~/.nvim/setup.sh
 
 md-render.nvim 使用 [denny0223/md-render.nvim](https://github.com/denny0223/md-render.nvim) fork，圖片由 Snacks 顯示。需要 Kitty、`mmdc`、ImageMagick 與 Chrome；在 tmux 中需啟用 `allow-passthrough on`。
 
+## 外掛更新
+
+在 Neovim 執行 `:PlugUpdate` 更新外掛，完成後重新啟動。外掛跟隨各 repo 的預設分支；md-render 使用上述 fork。
+
 ## 檢查
 
 ```sh
