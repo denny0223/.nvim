@@ -96,6 +96,7 @@ Plug("tpope/vim-surround")
 Plug("hotoo/pangu.vim")
 Plug("dense-analysis/ale")
 Plug("github/copilot.vim")
+Plug("delphinus/md-render.nvim", { tag = "v3.10.0" })
 vim.fn["plug#end"]()
 
 for _, plugin in pairs(vim.g.plugs) do
@@ -111,3 +112,9 @@ for _, plugin in pairs(vim.g.plugs) do
     return
   end
 end
+
+-- Separate document preview; source buffers remain ordinary Markdown.
+if not vim.env.PUPPETEER_EXECUTABLE_PATH and vim.fn.executable("google-chrome") == 1 then
+  vim.env.PUPPETEER_EXECUTABLE_PATH = vim.fn.exepath("google-chrome")
+end
+vim.keymap.set("n", "<leader>p", "<Cmd>MdRender toggle<CR>", { desc = "Toggle Markdown preview" })

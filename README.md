@@ -14,6 +14,12 @@ bash ~/.nvim/setup.sh
 
 `init.lua` 維護編輯偏好、外掛列表、快捷鍵與檔案類型設定。外掛放在 Neovim 的 XDG data 目錄，與 `~/.vim` 分開；不需要載入 `~/.vimrc`。
 
+## Markdown
+
+`\p`／`:MdRender toggle` 切換原始碼與整份文件預覽，包含圖片和 Mermaid。
+
+使用 [md-render.nvim](https://github.com/delphinus/md-render.nvim) `v3.10.0`，圖片透過 Kitty 圖片協定顯示。需要 Kitty；Mermaid 另需 `mmdc` 與 Chrome。
+
 ## 檢查
 
 ```sh
