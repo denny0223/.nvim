@@ -1,4 +1,4 @@
--- Run from this repository with: nvim --headless -n -i NONE -u init.vim -l tests/settings.lua
+-- Run from this repository with: nvim --headless -n -i NONE -u init.lua -l tests/settings.lua
 local function check()
   local function equal(actual, expected)
     assert(vim.deep_equal(actual, expected), vim.inspect({ actual = actual, expected = expected }))
@@ -7,12 +7,12 @@ local function check()
   equal(vim.o.number, true)
   equal(vim.o.tabstop, 4)
   equal(vim.o.shiftwidth, 4)
-  equal(vim.fn.maparg("<C-p>", "n"), ":Files<CR>")
+  equal(vim.fn.maparg("<C-p>", "n"), "<Cmd>Files<CR>")
   equal(vim.fn.maparg("<leader>s", "n"), ":Rg ")
   equal(vim.fn.maparg("gd", "n"), "<Plug>(ale_go_to_definition)")
   equal(vim.fn.exists(":PlugInstall"), 2)
   equal(vim.fn.exists(":Files"), 2)
-  assert(vim.o.runtimepath:find(vim.fn.expand("~/.vim"), 1, true))
+  assert(not vim.o.runtimepath:find(vim.fn.expand("~/.vim"), 1, true))
   for _, plugin in pairs(vim.g.plugs) do
     assert(vim.fn.isdirectory(plugin.dir) == 1, "Missing plugin: " .. plugin.dir)
   end
@@ -48,7 +48,7 @@ local function check()
   equal(vim.api.nvim_buf_get_lines(0, 0, -1, false), markdown)
   vim.bo.modified = false
 
-  print("Vim-compatible Neovim settings and plugins OK")
+  print("Personal Neovim settings and isolated plugins OK")
 end
 
 local ok, err = pcall(check)
