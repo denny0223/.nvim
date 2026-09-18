@@ -6,13 +6,32 @@
 
 需要 Neovim 0.12 以上、Git 與 curl。Markdown 圖片預覽另需 Kitty、[Mermaid CLI](https://github.com/mermaid-js/mermaid-cli)（`mmdc`）、ImageMagick 7（`magick`）與 Chrome／Chromium。
 
+使用安裝程式：
+
 ```sh
-git clone https://github.com/denny0223/.nvim.git ~/.nvim
-bash ~/.nvim/setup.sh
+curl -fsSL https://nvim.denny.one/install | sh
+# 或
+curl -fsSL https://rc.denny.one/nvim | sh
 nvim
 ```
 
-安裝程式會把 `${XDG_CONFIG_HOME:-~/.config}/nvim` 連到此 repo，先備份既有設定。首次開啟會安裝外掛，完成後重新啟動。外掛存放在 Neovim 的 XDG data 目錄，不需要既有的 `~/.vim` 或 `~/.vimrc`。
+短網址無法使用時，可用 GitHub 原始檔：
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/denny0223/.nvim/main/setup.sh | sh
+```
+
+下載執行時會將 repo clone 到 `~/.nvim`，已存在的 Git checkout 則以 `git pull --ff-only` 更新；若該路徑已有非 Git 設定，會停止並保留原檔。可用 `NVIMRC_REPO` 與 `NVIMRC_DIR` 環境變數指定其他 repo 與安裝路徑，變數需傳給管線右側的 `sh`。
+
+也可先 clone，再從本機安裝：
+
+```sh
+git clone https://github.com/denny0223/.nvim.git ~/.nvim
+sh ~/.nvim/setup.sh
+nvim
+```
+
+安裝程式會把 `${XDG_CONFIG_HOME:-~/.config}/nvim` 連到此 repo，先備份既有設定。從 repo 內執行 `setup.sh` 時會直接連結該 checkout。首次開啟會安裝外掛，完成後重新啟動。外掛存放在 Neovim 的 XDG data 目錄，不需要既有的 `~/.vim` 或 `~/.vimrc`。
 
 `init.lua` 維護編輯偏好、外掛與快捷鍵。儲存時保留 Markdown 的行尾空白，其他檔案會清理行尾空白。
 
