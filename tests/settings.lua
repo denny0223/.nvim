@@ -52,7 +52,7 @@ local function check()
   equal(vim.fn.maparg("<leader>p", "n"), "<Cmd>MdRender toggle<CR>")
   vim.cmd("MdRender toggle")
   equal(vim.api.nvim_get_current_buf(), source)
-  equal(vim.api.nvim_win_get_cursor(0)[1], 3)
+  equal(vim.api.nvim_win_get_cursor(0), { 3, 4 })
   equal(vim.api.nvim_buf_get_lines(0, 2, 3, false), { "Unsaved content" })
   equal(vim.bo.modified, true)
   vim.bo.modified = false

@@ -18,7 +18,7 @@ bash ~/.nvim/setup.sh
 
 `\p`／`:MdRender toggle` 切換原始碼與整份文件預覽，包含圖片和 Mermaid。
 
-使用 [md-render.nvim](https://github.com/delphinus/md-render.nvim) `v3.10.0`，圖片透過 Kitty 圖片協定顯示。需要 Kitty；Mermaid 另需 `mmdc` 與 Chrome。
+md-render.nvim 使用 [denny0223/md-render.nvim](https://github.com/denny0223/md-render.nvim) fork，圖片由原生 Kitty 後端顯示。需要 Kitty；Mermaid 另需 `mmdc` 與 Chrome。圖片預覽需直接在 Kitty 中開啟 Neovim。
 
 ## 檢查
 

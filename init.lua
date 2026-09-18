@@ -96,7 +96,7 @@ Plug("tpope/vim-surround")
 Plug("hotoo/pangu.vim")
 Plug("dense-analysis/ale")
 Plug("github/copilot.vim")
-Plug("delphinus/md-render.nvim", { tag = "v3.10.0" })
+Plug("denny0223/md-render.nvim", { commit = "20caded5b62806cdd30120f195ccd401d526b641" })
 vim.fn["plug#end"]()
 
 for _, plugin in pairs(vim.g.plugs) do
