@@ -41,6 +41,8 @@ local function check()
 
   equal(vim.fn.exists(":MdRender"), 2)
   equal(vim.fn.maparg("<leader>p", "n"), "<Cmd>MdRender toggle<CR>")
+  equal(require("md-render.image").config().backend, "snacks")
+  equal(Snacks.image.config.doc.enabled, false)
   vim.cmd.enew()
   vim.bo.filetype = "markdown"
   vim.api.nvim_buf_set_lines(0, 0, -1, false, { "# Preview", "", "Unsaved content" })

@@ -96,7 +96,8 @@ Plug("tpope/vim-surround")
 Plug("hotoo/pangu.vim")
 Plug("dense-analysis/ale")
 Plug("github/copilot.vim")
-Plug("denny0223/md-render.nvim", { commit = "20caded5b62806cdd30120f195ccd401d526b641" })
+Plug("folke/snacks.nvim")
+Plug("denny0223/md-render.nvim", { commit = "7a58f87722cefd4cde06381933a6c71726468a6f" })
 vim.fn["plug#end"]()
 
 for _, plugin in pairs(vim.g.plugs) do
@@ -117,4 +118,6 @@ end
 if not vim.env.PUPPETEER_EXECUTABLE_PATH and vim.fn.executable("google-chrome") == 1 then
   vim.env.PUPPETEER_EXECUTABLE_PATH = vim.fn.exepath("google-chrome")
 end
+require("snacks").setup({ image = { enabled = true, doc = { enabled = false }, math = { enabled = false } } })
+require("md-render.image").setup({ backend = "snacks" })
 vim.keymap.set("n", "<leader>p", "<Cmd>MdRender toggle<CR>", { desc = "Toggle Markdown preview" })
