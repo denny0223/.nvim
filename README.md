@@ -1,28 +1,32 @@
 # Denny's Neovim configuration
 
-個人 Neovim 設定，使用 Lua 與 vim-plug，獨立維護於 `~/.nvim`。
+個人 Neovim 設定，使用 Lua 與 vim-plug，可依自己的習慣複用與調整。主要使用及驗證環境為 Fedora、Kitty 與 tmux。
 
 ## 安裝
 
-將此 repo 放在 `~/.nvim`，再執行：
+需要 Neovim 0.12 以上、Git 與 curl。Markdown 圖片預覽另需 Kitty、[Mermaid CLI](https://github.com/mermaid-js/mermaid-cli)（`mmdc`）、ImageMagick 7（`magick`）與 Chrome／Chromium。
 
 ```sh
+git clone https://github.com/denny0223/.nvim.git ~/.nvim
 bash ~/.nvim/setup.sh
+nvim
 ```
 
-安裝程式會把 `${XDG_CONFIG_HOME:-~/.config}/nvim` 連到此 repo，先備份既有設定。首次開啟 `nvim` 安裝外掛後重新啟動。
+安裝程式會把 `${XDG_CONFIG_HOME:-~/.config}/nvim` 連到此 repo，先備份既有設定。首次開啟會安裝外掛，完成後重新啟動。外掛存放在 Neovim 的 XDG data 目錄，不需要既有的 `~/.vim` 或 `~/.vimrc`。
 
-`init.lua` 維護編輯偏好、外掛列表、快捷鍵與檔案類型設定。外掛放在 Neovim 的 XDG data 目錄，與 `~/.vim` 分開；不需要載入 `~/.vimrc`。
+`init.lua` 維護編輯偏好、外掛與快捷鍵。儲存時保留 Markdown 的行尾空白，其他檔案會清理行尾空白。
 
 ## Markdown
 
-`\p`／`:MdRender toggle` 切換原始碼與整份文件預覽，包含圖片和 Mermaid。圖片先顯示完整概覽；在圖片或其標題上按 Enter 進入 Neovim 圖片頁，`+`／`-` 縮放、`h/j/k/l` 平移、`0` 回復概覽、`q`／`Esc` 返回文件。
+`\p`／`:MdRender toggle` 切換原始碼與整份文件預覽，包含圖片和 Mermaid。圖片先顯示完整概覽；在圖片或其標題上按 Enter 進入圖片頁，`+`／`-` 縮放、`h/j/k/l` 平移、`0` 回復概覽、`q`／`Esc` 返回文件。
 
-md-render.nvim 使用 [denny0223/md-render.nvim](https://github.com/denny0223/md-render.nvim) fork，圖片由 Snacks 顯示。需要 Kitty、`mmdc`、ImageMagick 與 Chrome；在 tmux 中需啟用 `allow-passthrough on`。
+使用 [md-render.nvim fork](https://github.com/denny0223/md-render.nvim) 與 Snacks 圖片後端；外掛由 vim-plug 安裝。Mermaid 使用背景瀏覽器轉圖，不會開啟瀏覽器視窗。設定會偵測 `google-chrome`，其他安裝位置可用 `PUPPETEER_EXECUTABLE_PATH` 指定。tmux 需設定 `set -g allow-passthrough on`。
 
-## 外掛更新
+## 更新與還原
 
-在 Neovim 執行 `:PlugUpdate` 更新外掛，完成後重新啟動。外掛跟隨各 repo 的預設分支；md-render 使用上述 fork。
+執行 `git -C ~/.nvim pull --ff-only` 更新設定，再於 Neovim 執行 `:PlugUpdate` 更新外掛，完成後重新啟動。外掛跟隨各 repo 的預設分支；md-render 使用上述 fork 的版本。
+
+要還原安裝前的設定，移除安裝建立的 `nvim` 符號連結，再將安裝程式印出的備份目錄內的 `nvim` 移回原位。
 
 ## 檢查
 
@@ -32,4 +36,6 @@ nvim --headless -n -i NONE -u ~/.nvim/init.lua -l ~/.nvim/tests/settings.lua
 python3 ~/.nvim/tests/install.py
 ```
 
-最後一項會在暫存 HOME 下載外掛並檢查首次安裝，需要網路。
+最後一項會在暫存 HOME 下載外掛並檢查首次安裝，需要網路。圖片的實際顯示仍需在 Kitty／tmux 中檢查。
+
+採用 [MIT 授權](LICENSE)。
