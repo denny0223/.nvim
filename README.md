@@ -1,29 +1,31 @@
 # Denny's Neovim configuration
 
-個人 Neovim 設定，使用 Lua 與 vim-plug，可依自己的習慣複用與調整。主要使用及驗證環境為 Fedora、Kitty 與 tmux。
+English | [繁體中文](README.zh-TW.md)
 
-## 安裝
+Personal Neovim configuration built with Lua and vim-plug. Feel free to reuse and adapt it to your workflow. Primarily used and tested on Fedora with Kitty and tmux.
 
-需要 Neovim 0.12 以上、Git 與 curl。Markdown 圖片預覽另需 Kitty、[Mermaid CLI](https://github.com/mermaid-js/mermaid-cli)（`mmdc`）、ImageMagick 7（`magick`）與 Chrome／Chromium。
+## Installation
 
-使用安裝程式：
+Requires Neovim 0.12 or later, Git, and curl. Markdown image previews also require Kitty, [Mermaid CLI](https://github.com/mermaid-js/mermaid-cli) (`mmdc`), ImageMagick 7 (`magick`), and Chrome or Chromium.
+
+Run the installer:
 
 ```sh
 curl -fsSL https://nvim.denny.one/install | sh
-# 或
+# or
 curl -fsSL https://rc.denny.one/nvim | sh
 nvim
 ```
 
-短網址無法使用時，可用 GitHub 原始檔：
+If the short URLs are unavailable, use the raw file on GitHub:
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/denny0223/.nvim/main/setup.sh | sh
 ```
 
-下載執行時會將 repo clone 到 `~/.nvim`，已存在的 Git checkout 則以 `git pull --ff-only` 更新；若該路徑已有非 Git 設定，會停止並保留原檔。可用 `NVIMRC_REPO` 與 `NVIMRC_DIR` 環境變數指定其他 repo 與安裝路徑，變數需傳給管線右側的 `sh`。
+When run via curl, the installer clones the repository into `~/.nvim` or updates an existing Git checkout with `git pull --ff-only`. If the destination exists but is not a Git checkout, it stops and leaves the existing files untouched. Set `NVIMRC_REPO` and `NVIMRC_DIR` to use a different repository or installation directory; pass these environment variables to `sh` on the right side of the pipe.
 
-也可先 clone，再從本機安裝：
+Alternatively, clone the repository and install from the local checkout:
 
 ```sh
 git clone https://github.com/denny0223/.nvim.git ~/.nvim
@@ -31,23 +33,23 @@ sh ~/.nvim/setup.sh
 nvim
 ```
 
-安裝程式會把 `${XDG_CONFIG_HOME:-~/.config}/nvim` 連到此 repo，先備份既有設定。從 repo 內執行 `setup.sh` 時會直接連結該 checkout。首次開啟會安裝外掛，完成後重新啟動。外掛存放在 Neovim 的 XDG data 目錄，不需要既有的 `~/.vim` 或 `~/.vimrc`。
+The installer backs up any existing configuration and creates a symlink from `${XDG_CONFIG_HOME:-~/.config}/nvim` to this repository. Running `setup.sh` from a local checkout links that checkout directly. Plugins are installed on the first launch; restart Neovim once installation finishes. Plugins are stored in Neovim's XDG data directory, so no existing `~/.vim` or `~/.vimrc` is needed.
 
-`init.lua` 維護編輯偏好、外掛與快捷鍵。儲存時保留 Markdown 的行尾空白，其他檔案會清理行尾空白。
+Edit `init.lua` to customize editor preferences, plugins, and key mappings. Trailing whitespace is preserved in Markdown files and stripped from other files on save.
 
 ## Markdown
 
-`\p`／`:MdRender toggle` 切換原始碼與整份文件預覽，包含圖片和 Mermaid。圖片先顯示完整概覽；在圖片或其標題上按 Enter 進入圖片頁，`+`／`-` 縮放、`h/j/k/l` 平移、`0` 回復概覽、`q`／`Esc` 返回文件。
+Use `\p` or `:MdRender toggle` to switch between source text and a full document preview, including images and Mermaid diagrams. Images initially appear as complete overviews. Press Enter on an image or its caption to open the image view, then use `+`/`-` to zoom, `h/j/k/l` to pan, `0` to reset to the overview, and `q`/`Esc` to return to the document.
 
-使用 [md-render.nvim fork](https://github.com/denny0223/md-render.nvim) 與 Snacks 圖片後端；外掛由 vim-plug 安裝。Mermaid 使用背景瀏覽器轉圖，不會開啟瀏覽器視窗。設定會偵測 `google-chrome`，其他安裝位置可用 `PUPPETEER_EXECUTABLE_PATH` 指定。tmux 需設定 `set -g allow-passthrough on`。
+Previews use this [md-render.nvim fork](https://github.com/denny0223/md-render.nvim) with the Snacks image backend; vim-plug installs both plugins. Mermaid diagrams are rendered by a browser running in the background, without opening a browser window. The configuration detects `google-chrome` automatically; use `PUPPETEER_EXECUTABLE_PATH` to specify another browser installation. In tmux, enable `set -g allow-passthrough on`.
 
-## 更新與還原
+## Updating and restoring
 
-執行 `git -C ~/.nvim pull --ff-only` 更新設定，再於 Neovim 執行 `:PlugUpdate` 更新外掛，完成後重新啟動。外掛跟隨各 repo 的預設分支；md-render 使用上述 fork 的版本。
+Run `git -C ~/.nvim pull --ff-only` to update the configuration, then run `:PlugUpdate` in Neovim to update plugins and restart when finished. Plugins follow their repositories' default branches; md-render uses the fork linked above.
 
-要還原安裝前的設定，移除安裝建立的 `nvim` 符號連結，再將安裝程式印出的備份目錄內的 `nvim` 移回原位。
+To restore your previous configuration, remove the `nvim` symlink created by the installer, then move `nvim` from the backup directory printed by the installer back to its original location.
 
-## 檢查
+## Checks
 
 ```sh
 python3 ~/.nvim/tests/setup.py
@@ -55,6 +57,6 @@ nvim --headless -n -i NONE -u ~/.nvim/init.lua -l ~/.nvim/tests/settings.lua
 python3 ~/.nvim/tests/install.py
 ```
 
-最後一項會在暫存 HOME 下載外掛並檢查首次安裝，需要網路。圖片的實際顯示仍需在 Kitty／tmux 中檢查。
+The last check downloads plugins into a temporary HOME and verifies the first installation, so it requires network access. Image display still needs to be checked in Kitty/tmux.
 
-採用 [MIT 授權](LICENSE)。
+Licensed under the [MIT License](LICENSE).
